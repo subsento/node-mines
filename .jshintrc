@@ -19,6 +19,6 @@
   "strict": true,
   "unused": "vars",
   "undef": true,
-  "esversion": 6,
+  "esversion": 8,
   "latedef" : "nofunc"
 }

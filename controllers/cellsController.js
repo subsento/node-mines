@@ -7,8 +7,10 @@ module.exports = {
   getCell,
   deleteCover,
   putFlag,
+  onEvent
 };
 
+let onEventCallback = null;
 
 function getAll(req, res, next) {
   var cells = model.getAll(req.params.id);
@@ -32,6 +34,9 @@ function deleteCover(req, res, next) {
   var cell = model.uncover(req.params.id, req.params.x, req.params.y);
   if (cell) {
       res.status(200).json(cell);
+      if (onEventCallback) {
+        onEventCallback({cells: cell, id: req.params.id});
+      }
   } else {
       res.status(404).end();
   }
@@ -41,7 +46,14 @@ function putFlag(req, res, next) {
   var cell = model.triggerFlag(req.params.id, req.params.x, req.params.y);
   if (cell) {
       res.status(200).json(cell);
+      if (onEventCallback) {
+          onEventCallback({cells: [cell], id: req.params.id});
+      }
   } else {
       res.status(404).end();
   }
+}
+
+function onEvent(callback) {
+    onEventCallback = callback;
 }

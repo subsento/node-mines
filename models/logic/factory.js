@@ -8,7 +8,8 @@ var getKey = require('./hashmap.js').getKey;
 var level = require('./level.js');
 
 module.exports = {
-    create
+    create,
+    calculateWarnings
 };
 
 

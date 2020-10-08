@@ -1,6 +1,6 @@
 'use strict';
 
-var repository = require('./repository.js');
+var repository = require('./redis.js');
 
 var covers = require('./logic/covers.js');
 var board = require('./logic/field.js');
@@ -51,11 +51,18 @@ function uncover(id, x, y) {
     if (!cell) {
         return;
     }
+
+    console.log(point);
+    //console.log(field);
+
     var result = board
         .uncoverDeep(field, point)
         .map((point) => createUpdate(field, point));
 
     field.state = board.getGameState(field);
+
+    console.log(field.state);
+
     if (field.state === 'loose') {
         field.mines.forEach((p) => board.uncoverDeep(field, p));
         result = result.concat(field.mines.map((point) => createUpdate(field, point)));

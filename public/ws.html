@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html node-mines>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script lang="javascript">
+        var exampleSocket = new WebSocket("ws://" + location.host + "/events?id=EEkLwpVRi");
+
+        exampleSocket.onmessage = function (event) {
+            console.log(event.data);
+        }
+    </script>
+</body>

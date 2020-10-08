@@ -10,7 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.1",
+    "deasync": "^0.1.20",
     "express": "^4.15.2",
+    "express-ws": "^4.0.0",
+    "redis": "^3.0.2",
     "shortid": "^2.2.8"
   },
   "devDependencies": {

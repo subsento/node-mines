@@ -1,6 +1,6 @@
 'use strict';
 
-var repository = require('./repository.js');
+var repository = require('./redis.js');
 var factory = require('./logic/factory.js');
 
 module.exports = {

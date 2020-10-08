@@ -104,3 +104,9 @@ function getPoint(cell) {
         y: cell.parentNode.rowIndex
     };
 }
+
+var ws = new WebSocket(`ws://${location.host}/events?id=${id}`);
+
+ws.onmessage = function (event) {
+    JSON.parse(event.data).forEach(onUpdate);
+};
