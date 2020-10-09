@@ -1,12 +1,14 @@
 'use strict';
 
-const redis = require("redis");
+const REDIS_SERVER = process.env.REDIS_SERVER || 'redis://192.168.64.3:31578';
+
+const redis = require('redis');
 var deasync = require('deasync');
-const client = redis.createClient("redis://192.168.64.3:31578");
+const client = redis.createClient(REDIS_SERVER);
 const hashmap = require('./logic/hashmap.js');
 const factory = require('./logic/factory.js');
 
-client.on("error", function(error) {
+client.on('error', function(error) {
     console.error(error);
 });
 

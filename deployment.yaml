@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-mines
+  labels:
+    app: node-mines
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-mines
+  template:
+    metadata:
+      labels:
+        app: node-mines
+    spec:
+      containers:
+      - name: node-mines-app
+        image: 673764500118.dkr.ecr.eu-central-1.amazonaws.com/node-mines:latest
+        ports:
+        - containerPort: 3000
+        env:
+          - name: PORT
+            value: "3000"
+          - name: REDIS_SERVER
+            value: "redis://redis:6379"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-mines-service
+  labels:
+    app: node-mines
+spec:
+  type: LoadBalancer
+  selector:
+    app: node-mines
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
